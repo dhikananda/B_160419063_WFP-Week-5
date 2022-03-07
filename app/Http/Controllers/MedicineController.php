@@ -44,9 +44,23 @@ class MedicineController extends Controller
      * @param  \App\Medicine  $medicine
      * @return \Illuminate\Http\Response
      */
-    public function show(Medicine $medicine)
+    public function show($medicine)
     {
-        //
+        // select * from medicine where id=$medicine
+        $res = Medicine::find($medicine);
+        $message = "";
+        if($res)
+        {
+            // apabila ditemukan
+            $message = $res;
+        }
+        else 
+        {
+            // apabila tidak ditemukan
+            $message = NULL;
+        }
+        // parsing
+        return view('medicine.show', compact('message'));
     }
 
     /**

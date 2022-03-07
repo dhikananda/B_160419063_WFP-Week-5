@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Medicine extends Model
 {
-    //
+    // bisa melihat kategori sesuai dengan kolom category_id
+    public function category()
+    {
+        // mereturn sebuah model kategory, foreignkeynya
+        return $this->belongsTo('App\Category','category_id');
+    }
 }

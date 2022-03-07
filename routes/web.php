@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('medicine','MedicineController');
+
+Route::get('/report/listmedicine/{id}','CategoryController@showlist')->name('reportShowMedicine');
