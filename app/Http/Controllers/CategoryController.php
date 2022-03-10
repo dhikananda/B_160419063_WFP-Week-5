@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -14,32 +15,52 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //Tampilkan seluruh data kategori obat
-        // select * from categories
+        // 1-1
+        // $alldata = DB::table('categories')->get();
+        $alldata = Category::all();
 
-        //Tampilkan seluruh nama medecines, formula dan harga
-        // select generic_name, form, price from medicines 
+        // return view('category.show_all_data', compact('alldata'));
 
-        //Tampilkan seluruh nama medecines, formula dan nama kategori
-        // select m.generic_name, m.form, c.name from medicines m inner join categories c on m.category_id = c.id
+        // 3-2
+        $category_havent_medicines = DB::table('categories as c')
+        ->leftJoin('medicines as m','c.id','=','m.category_id')
+        ->select('c.name')
+        ->whereNull('m.category_id')
+        ->get();
+        // $category_havent_medicines = Category::leftJoin('medicines','categories.id','=','medicines.category_id')
+        // ->select('categories.name')
+        // ->whereNull('medicines.category_id')
+        // ->get();
 
-        //Tampilkan jumlah kategori yang memiliki data medicines
-        // select count(distinct(category_id)) from medicines
+        // return view('category.show_count_havent_medicine', compact('category_havent_medicines'));
 
-        //Tampilkan nama kategori yang tidak memiliki data medicines satupun
-        // Select c.name from categories c left join medicines m on m.category_id = c.id where m.category_id is null
+        // 3-3
+        // $average_category_have_medicines = DB::table('categories')
+        // ->leftJoin('medicines','categories.id','=','medicines.category_id')
+        // ->select('categories.name',DB::raw('ifnull(avg(medicines.price),0) as average'))
+        // ->groupBy('categories.name')
+        // ->get();
+        $average_category_have_medicines = Category::leftJoin('medicines','categories.id','=','medicines.category_id')
+        ->select('categories.name', DB::raw('ifnull(avg(medicines.price),0) as average'))
+        ->groupBy('categories.name')
+        ->get();
 
-        //Tampilkan rata-rata harga setiap kategori obat. Bila tidak ada obat maka berikan 0
-        // select c.name, ifnull(avg(m.price),0) from categories c left join medicines m on c.id = m.category_id group by c.id
+        // return view('category.show_average_category_have_medicines', compact('average_category_have_medicines'));
 
-        //Tampilkan kategori obat yang memiliki 1 produk medicine saja
-        // select c.name from medicines m inner join categories c on m.category_id = c.id group by c.id having count(m.category_id) = 1
+        // 3-4
+        // $category_have_one_medicine = DB::table('categories as c')
+        // ->join('medicines as m','c.id','=','m.category_id')
+        // ->select('c.name')
+        // ->groupBy('c.name')
+        // ->having(DB::raw('count(m.category_id)'),'=',1)
+        // ->get();
+        $category_have_one_medicine = Category::join('medicines','categories.id','=','medicines.category_id')
+        ->select('categories.name')
+        ->groupBy('categories.name')
+        ->having(DB::raw('count(medicines.category_id)'),'=',1)
+        ->get();
 
-        //Tampilkan obat yang memiliki satu form
-        // select generic_name from medicines group by generic_name having count(form) = 1
-
-        //Tampilkan kategori dan nama obat yang memiliki harga termahal
-        // select c.name, m.generic_name from medicines m inner join categories c on m.category_id = c.id order by m.price LIMIT 1
+        return view('category.show_category_have_one_medicine', compact('category_have_one_medicine'));
     }
 
     /**
