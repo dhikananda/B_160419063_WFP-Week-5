@@ -12,4 +12,6 @@ class Medicine extends Model
         // mereturn sebuah model kategory, foreignkeynya
         return $this->belongsTo('App\Category','category_id');
     }
+
+    //wfp week 5
 }
