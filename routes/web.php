@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Layouts/Conquer');
 });
 
 Route::resource('medicine','MedicineController');
@@ -22,12 +22,12 @@ Route::resource('medicine','MedicineController');
 Route::get('/report/listmedicine/{id}','CategoryController@showlist')->name('reportShowMedicine');
 
 // tugas
-Route::resource('show_category','CategoryController');
-Route::resource('show_medicine_nfp', 'MedicineController');
-Route::resource('show_medicine_nfc', 'MedicineController');
-Route::resource('show_count_category', 'MedicineController');
-Route::resource('show_category_no_medicines', 'CategoryController');
-Route::resource('show_average_category', 'CategoryController');
-Route::resource('show_category_have_one_medicine', 'CategoryController');
-Route::resource('show_medicine_have_one_form', 'MedicineController');
-Route::resource('show_medicine_category_maxprice', 'MedicineController');
+Route::get('show_category','CategoryController@showAllData')->name('reportShowCategory');
+Route::get('show_medicine_nfp', 'MedicineController@showAllDataNFP')->name('reportShowAllDataNFP');
+Route::get('show_medicine_nfc', 'MedicineController@showAllDataNFC')->name('reportShowAllDataNFC');
+Route::get('show_count_category', 'MedicineController@countCategory')->name('reportCountCategory');
+Route::get('show_category_no_medicines', 'CategoryController@showCategoryNoMedicines')->name('reportShowCategoryNoMedicines');
+Route::get('show_average_category', 'CategoryController@averageCategoryHaveMedicines')->name('reportAverageCategoryHaveMedicines');
+Route::get('show_category_have_one_medicine', 'CategoryController@showCategoryHaveOneMedicine')->name('reportShowCategoryHaveOneMedicine');
+Route::get('show_medicine_have_one_form', 'MedicineController@haveOneForm')->name('reportHaveOneForm');
+Route::get('show_medicine_category_maxprice', 'MedicineController@medicineHighestPrice')->name('reportmedicineHighestPrice');

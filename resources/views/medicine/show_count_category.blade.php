@@ -1,3 +1,5 @@
+@extends('layouts.conquer')
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +16,8 @@
   <h2>Count of Category that Have Medicines</h2>
   <h3>{{ $count_category }}</h3>
 </div>
+
+@endsection
 
 </body>
 </html>

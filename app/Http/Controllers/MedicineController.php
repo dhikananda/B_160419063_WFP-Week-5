@@ -14,48 +14,69 @@ class MedicineController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {    
+        //
+    }
+
+    public function showAllDataNFP()
     {
         // 1-2
         // $alldata_medicine = DB::table('medicines')
         // ->select('generic_name','form','price')
         // ->get();
+
         $alldata_medicine = Medicine::select('generic_name','form','price')
         ->get();
 
-        // return view('medicine.show_name_form_price', compact('alldata_medicine'));
+        return view('medicine.show_name_form_price', compact('alldata_medicine'));
+    }
 
+    public function showAllDataNFC()
+    {
         // 2-1
         // $data_nfc = DB::table('medicines as m')
         // ->join('categories as c','m.category_id','=','c.id')
         // ->select('m.generic_name','m.form','c.name')
         // ->get();
+
         $data_nfc = Medicine::join('categories','medicines.category_id','=','categories.id')
         ->select('medicines.generic_name','medicines.form','categories.name')
         ->get();
 
-        // return view('medicine.show_name_form_cname', compact('data_nfc'));
-    
+        return view('medicine.show_name_form_cname', compact('data_nfc'));
+    }
+
+    public function countCategory()
+    {
         // 3-1
-        $count_category = DB::table('medicines')
-        ->distinct()
-        ->count('category_id');
-        // $count_category = Medicine::distinct()->count('category_id');
+        // $count_category = DB::table('medicines')
+        // ->distinct()
+        // ->count('category_id');
 
-        // return view('medicine.show_count_category', compact('count_category'));
+        $count_category = Medicine::distinct()->count('category_id');
 
+        return view('medicine.show_count_category', compact('count_category'));
+    }
+
+    public function haveOneForm()
+    {
         // 3-5
         // $medicine_have_one_form = DB::table('medicines')
         // ->select('generic_name')
         // ->groupBy('generic_name')
         // ->having(DB::raw('count(form)'),'=',1)
         // ->get();
+
         $medicine_have_one_form = Medicine::select('generic_name')
         ->groupBy('generic_name')
         ->having(DB::raw('count(form)'),'=',1)
         ->get();
 
-        // return view('medicine.show_medicine_have_one_form', compact('medicine_have_one_form'));
+        return view('medicine.show_medicine_have_one_form', compact('medicine_have_one_form'));
+    }
 
+    public function medicineHighestPrice()
+    {
         // 3-6
         // $medicine_category_maxprice = DB::table('medicines as m')
         // ->join('categories as c','m.category_id','=','c.id')

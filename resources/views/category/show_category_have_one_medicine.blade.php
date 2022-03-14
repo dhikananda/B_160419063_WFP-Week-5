@@ -1,3 +1,5 @@
+@extends('layouts.conquer')
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,6 +33,8 @@
     <h2>Tidak ada data</h2>
   @endif
 </div>
+
+@endsection
 
 </body>
 </html>

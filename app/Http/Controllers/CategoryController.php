@@ -15,12 +15,20 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        //
+    }
+
+    public function showAllData()
+    {
         // 1-1
         // $alldata = DB::table('categories')->get();
         $alldata = Category::all();
 
-        // return view('category.show_all_data', compact('alldata'));
+        return view('category.show_all_data', compact('alldata'));
+    }
 
+    public function showCategoryNoMedicines()
+    {
         // 3-2
         $category_havent_medicines = DB::table('categories as c')
         ->leftJoin('medicines as m','c.id','=','m.category_id')
@@ -31,9 +39,13 @@ class CategoryController extends Controller
         // ->select('categories.name')
         // ->whereNull('medicines.category_id')
         // ->get();
+        
+        return view('category.show_count_havent_medicine', compact('category_havent_medicines'));
+        
+    }
 
-        // return view('category.show_count_havent_medicine', compact('category_havent_medicines'));
-
+    public function averageCategoryHaveMedicines()
+    {
         // 3-3
         // $average_category_have_medicines = DB::table('categories')
         // ->leftJoin('medicines','categories.id','=','medicines.category_id')
@@ -45,8 +57,12 @@ class CategoryController extends Controller
         ->groupBy('categories.name')
         ->get();
 
-        // return view('category.show_average_category_have_medicines', compact('average_category_have_medicines'));
+        return view('category.show_average_category_have_medicines', compact('average_category_have_medicines'));
 
+    }
+
+    public function showCategoryHaveOneMedicine()
+    {
         // 3-4
         // $category_have_one_medicine = DB::table('categories as c')
         // ->join('medicines as m','c.id','=','m.category_id')
@@ -61,6 +77,7 @@ class CategoryController extends Controller
         ->get();
 
         return view('category.show_category_have_one_medicine', compact('category_have_one_medicine'));
+
     }
 
     /**
