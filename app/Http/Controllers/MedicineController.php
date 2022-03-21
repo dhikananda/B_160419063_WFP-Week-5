@@ -40,7 +40,7 @@ class MedicineController extends Controller
         // ->get();
 
         $data_nfc = Medicine::join('categories','medicines.category_id','=','categories.id')
-        ->select('medicines.generic_name','medicines.form','categories.name')
+        ->select('medicines.generic_name','medicines.form','categories.name', 'medicines.id')
         ->get();
 
         return view('medicine.show_name_form_cname', compact('data_nfc'));
@@ -93,6 +93,26 @@ class MedicineController extends Controller
 
         return view('medicine.show_medicine_category_maxprice', compact('medicine_category_maxprice'));
     }
+
+    public function showInfo()
+    {
+        return response()->json(array(
+            'status'=>'oke',
+            'msg'=>"<div class='alert alert-info'>
+                    Did you know? <br>This message is sent by a Controller.'</div>"
+        ),200);
+    }
+
+    public function showHighPrice()
+    {
+        $result=Medicine::orderBy('price','DESC')->first();
+        return response()->json(array(
+            'status'=>'oke',
+            'msg'=>"<div class='alert alert-info'>
+            Did you know? <br>The most expensive product is ". $result->generic_name . "</div>"
+        ),200);
+    }
+
 
     /**
      * Show the form for creating a new resource.

@@ -31,3 +31,6 @@ Route::get('show_average_category', 'CategoryController@averageCategoryHaveMedic
 Route::get('show_category_have_one_medicine', 'CategoryController@showCategoryHaveOneMedicine')->name('reportShowCategoryHaveOneMedicine');
 Route::get('show_medicine_have_one_form', 'MedicineController@haveOneForm')->name('reportHaveOneForm');
 Route::get('show_medicine_category_maxprice', 'MedicineController@medicineHighestPrice')->name('reportmedicineHighestPrice');
+
+Route::post('/medicines/showInfo','MedicineController@showInfo')->name('medicines.showInfo');
+Route::get('/medicines/showHighPrice','MedicineController@showHighPrice')->name('medicines.showHighPrice');
