@@ -34,3 +34,6 @@ Route::get('show_medicine_category_maxprice', 'MedicineController@medicineHighes
 
 Route::post('/medicines/showInfo','MedicineController@showInfo')->name('medicines.showInfo');
 Route::get('/medicines/showHighPrice','MedicineController@showHighPrice')->name('medicines.showHighPrice');
+
+Route::post('transaction/showDataAjax','TransactionController@showAjax')->name('transaction.showAjax');
+Route::get('transaction/showAllData','TransactionController@showData')->name('transaction.showAllData');

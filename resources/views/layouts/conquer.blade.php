@@ -24,6 +24,9 @@ License: You must have a valid license purchased only from themeforest(the above
 <meta content="" name="description"/>
 <meta content="" name="author"/>
 <meta name="MobileOptimized" content="320">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('conquer2/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"/>
@@ -59,7 +62,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!-- BEGIN LOGO -->
 		<div class="page-logo">
             <a href="index.html">
-                <img src="conquer2/img/logo.png" alt="logo"/>
+                <img src="{{asset('conquer2/img/logo.png')}}" alt="logo"/>
             </a>
         </div>
         <form class="search-form search-form-header" role="form" action="index.html">
@@ -543,7 +546,13 @@ License: You must have a valid license purchased only from themeforest(the above
 					<span class="selected"></span>
 					</a>
 				</li>
-				
+				<li >
+					<a href="{{route('transaction.showAllData')}}">
+					<i class="icon-calendar"></i>
+					<span class="title">Data Transaction</span>
+					<span class="selected"></span>
+					</a>
+				</li>
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>
