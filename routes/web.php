@@ -37,3 +37,6 @@ Route::get('/medicines/showHighPrice','MedicineController@showHighPrice')->name(
 
 Route::post('transaction/showDataAjax','TransactionController@showAjax')->name('transaction.showAjax');
 Route::get('transaction/showAllData','TransactionController@showData')->name('transaction.showAllData');
+
+Route::resource('category','CategoryController');
+Route::resource('medicine','MedicineController');

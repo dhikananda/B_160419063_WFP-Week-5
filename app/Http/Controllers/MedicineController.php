@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Medicine;
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -121,7 +122,9 @@ class MedicineController extends Controller
      */
     public function create()
     {
-        //
+        $category = Category::all();
+
+        return view('medicine.create', compact('category'));
     }
 
     /**
@@ -132,7 +135,21 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Medicine();
+
+        $data->generic_name = $request->get('generic_name');
+        $data->form = $request->get('form');
+        $data->restriction_formula = $request->get('restriction_form');
+        $data->price = $request->get('price');
+        $data->description = $request->get('description');
+        $data->category_id = $request->get('category_id');
+        $data->faskes1 = $request->get('faskes1');
+        $data->faskes2 = $request->get('faskes2');
+        $data->faskes3 = $request->get('faskes3');
+
+        $data->save();
+
+        return redirect()->route('reportShowAllDataNFP')->with('status','Medicine is added');
     }
 
     /**

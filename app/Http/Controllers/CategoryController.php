@@ -87,7 +87,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('category.create');
     }
 
     /**
@@ -98,7 +98,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Category();
+
+        $data->name = $request->get('name_category');
+        $data->description = $request->get('description');
+
+        $data->save();
+
+        return redirect()->route('reportShowCategory')->with('status','Category is added');
     }
 
     /**

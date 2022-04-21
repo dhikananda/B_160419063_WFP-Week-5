@@ -485,71 +485,85 @@ License: You must have a valid license purchased only from themeforest(the above
 				</li>
 				<li class="start active ">
 					<a href="{{route('reportShowCategory')}}">
-					<i class="icon-home"></i>
+					<i class="fa fa-list-alt"></i>
 					<span class="title">Data Category</span>
 					<span class="selected"></span>
 					</a>
 				</li>
 				<li>
 					<a href="{{route('reportShowCategoryNoMedicines')}}">
-					<i class="icon-puzzle"></i>
+					<i class="fa fa-list-alt"></i>
 					<span class="title">Category No Medic</span>
 					<span class="selected"></span>
 					</a>
 				</li>
 				<li >
 					<a href="{{route('reportShowAllDataNFP')}}">
-					<i class="icon-present"></i>
+					<i class="fa fa-list-alt"></i>
 					<span class="title">Data Medicines</span>
 					<span class="selected"></span>
 					</a>
 				</li>
 				<li >
 					<a href="{{route('reportCountCategory')}}">
-					<i class="icon-calendar"></i>
+					<i class="fa fa-list-alt"></i>
 					<span class="title">Category Count</span>
 					<span class="selected"></span>
 					</a>
 				</li>
 				<li >
 					<a href="{{route('reportShowAllDataNFC')}}">
-					<i class="icon-calendar"></i>
+					<i class="fa fa-list-alt"></i>
 					<span class="title">Medicines Category</span>
 					<span class="selected"></span>
 					</a>
 				</li>
 				<li >
 					<a href="{{route('reportAverageCategoryHaveMedicines')}}">
-					<i class="icon-calendar"></i>
+					<i class="fa fa-list-alt"></i>
 					<span class="title">Category Average</span>
 					<span class="selected"></span>
 					</a>
 				</li>
 				<li >
 					<a href="{{route('reportShowCategoryHaveOneMedicine')}}">
-					<i class="icon-calendar"></i>
+					<i class="fa fa-list-alt"></i>
 					<span class="title">Category One Medic</span>
 					<span class="selected"></span>
 					</a>
 				</li>
 				<li >
 					<a href="{{route('reportHaveOneForm')}}">
-					<i class="icon-calendar"></i>
+					<i class="fa fa-list-alt"></i>
 					<span class="title">Medic One Form</span>
 					<span class="selected"></span>
 					</a>
 				</li>
 				<li >
 					<a href="{{route('reportmedicineHighestPrice')}}">
-					<i class="icon-calendar"></i>
+					<i class="fa fa-list-alt"></i>
 					<span class="title">Medic Highest Price</span>
 					<span class="selected"></span>
 					</a>
 				</li>
 				<li >
 					<a href="{{route('transaction.showAllData')}}">
-					<i class="icon-calendar"></i>
+					<i class="fa fa-list-alt"></i>
 					<span class="title">Data Transaction</span>
+					<span class="selected"></span>
+					</a>
+				</li>
+				<li >
+					<a href="{{route('category.create')}}">
+					<i class="fa fa-plus-circle"></i>
+					<span class="title">Add New Category</span>
+					<span class="selected"></span>
+					</a>
+				</li>
+				<li >
+					<a href="{{route('medicine.create')}}">
+					<i class="fa fa-plus-circle"></i>
+					<span class="title">Add New Medicine</span>
 					<span class="selected"></span>
 					</a>
 				</li>
