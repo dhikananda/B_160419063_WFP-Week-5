@@ -36,6 +36,7 @@
         <th>Generic Name</th>
         <th>Formulas</th>
         <th>Price</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -44,6 +45,9 @@
         <td>{{ $li->generic_name }}</td>
         <td>{{ $li->form }}</td>
         <td>{{ $li->price }}</td>
+        <td>
+          <a href="{{ route('medicine.edit', $li->id) }}" class="btn btn-xs btn-info">edit</a>
+        </td>
       </tr>
     @endforeach
     </tbody>

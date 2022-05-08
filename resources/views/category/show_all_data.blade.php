@@ -7,6 +7,12 @@
     </div>
   @endif
 
+  @if (session('error'))
+    <div class="alert alert-danger">
+      {{ session('error') }}
+    </div>
+  @endif
+
   <h2>List Categories</h2>
 
   @if($alldata)
@@ -16,7 +22,7 @@
         <th>ID</th>
         <th>Name</th>
         <th>Description</th>
-        <th>List of Medicines</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -26,7 +32,13 @@
         <td>{{ $li->name }}</td>
         <td>{{ $li->description }}</td>
         <td>
-          a
+          <a href="{{ route('category.edit',$li->id) }}" class="btn btn-xs btn-info">edit</a>
+
+          <form method="post" action="{{ url('category/'.$li->id) }}">
+            @csrf
+            @method('DELETE')
+            <input type="submit" value="delete" class="btn btn-danger btn-xs" onclick="if(!confirm('Are you sure to delte this record ?')) return false;">
+          </form>
         </td>
       </tr>
     @endforeach

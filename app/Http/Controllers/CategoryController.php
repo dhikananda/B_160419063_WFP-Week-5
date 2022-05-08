@@ -127,7 +127,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $data = $category;
+        return view('category.edit', compact('data'));
     }
 
     /**
@@ -139,7 +140,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $category->name = $request->get('name');
+        $category->description = $request->get('description');
+        $category->save();
+
+        return redirect()->route('reportShowCategory')->with('status','Category data is changed');
     }
 
     /**
@@ -150,7 +155,13 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        try {
+            $category->delete();
+            return redirect()->route('reportShowCategory')->with('status','Success delete data category');
+        } catch (\PDOException $e) {
+            $msg = "Data failed to delete. Please make sure that child data already deleted too";
+            return redirect()->route('reportShowCategory')->with('error',$msg);
+        }
     }
 
     public function showlist($id_category)

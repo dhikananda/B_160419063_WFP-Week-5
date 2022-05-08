@@ -17,8 +17,6 @@ Route::get('/', function () {
     return view('Layouts/Conquer');
 });
 
-Route::resource('medicine','MedicineController');
-
 Route::get('/report/listmedicine/{id}','CategoryController@showlist')->name('reportShowMedicine');
 
 // tugas

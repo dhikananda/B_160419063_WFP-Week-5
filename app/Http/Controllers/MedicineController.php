@@ -26,8 +26,7 @@ class MedicineController extends Controller
         // ->select('generic_name','form','price')
         // ->get();
 
-        $alldata_medicine = Medicine::select('generic_name','form','price')
-        ->get();
+        $alldata_medicine = Medicine::all();
 
         return view('medicine.show_name_form_price', compact('alldata_medicine'));
     }
@@ -185,7 +184,8 @@ class MedicineController extends Controller
      */
     public function edit(Medicine $medicine)
     {
-        //
+        $data = $medicine;
+        return view('medicine.edit', compact('data'));
     }
 
     /**
