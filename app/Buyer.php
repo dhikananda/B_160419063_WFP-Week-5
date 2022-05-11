@@ -9,4 +9,6 @@ class Buyer extends Model
     public function transaction(){
         return $this->hasMany('App\Transaction','buyer_id','id');
     }
+
+    // cobaaaa
 }
