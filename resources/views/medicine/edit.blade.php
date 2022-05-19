@@ -41,62 +41,37 @@
     </div>
 
     <div class="form-group">
-      @if($category)
-
-        <label class="control-label col-sm-2" for="description">Category: </label>
-        <select id="category" name="category_id">
-          <option value="{{$data->category_id}}" selected disabled hidden>{{$data->category->name}}</option>
-          @foreach ($category as $c)
-          <option value="{{$c->id}}">{{$c->name}}</option>
-          @endforeach
-        </select>
-
-      @endif
+      <label class="control-label col-sm-2" for="description">Category: </label>
+      <select id="category" name="category_id">
+        <option value="{{$category->id}}" selected hidden>{{$category->name}}</option>
+        @foreach ($allcat as $c)
+        <option value="{{$c->id}}">{{$c->name}}</option>
+        @endforeach
+      </select>
     </div>
 
     <div class="form-group">
       <label class="control-label col-sm-2" for='faskes1'>Faskes 1: </label>
-      if($data->faskes1 == 1){
-        <input type="radio" id="faskes1" name="faskes1" value="1" selected>
+        <input type="radio" id="faskes1" name="faskes1" value="1" {{$data->faskes1 == 1 ? "checked":""}}>
         <label for="faskes1">Yes</label>&nbsp;&nbsp;&nbsp;
-        <input type="radio" id="faskes_1_no" name="faskes1" value="0">
+        <input type="radio" id="faskes_1_no" name="faskes1" value="0" {{$data->faskes1 == 0 ? "checked":""}}>
         <label for="faskes1">No</label>
-      } else {
-        <input type="radio" id="faskes1" name="faskes1" value="1">
-        <label for="faskes1">Yes</label>&nbsp;&nbsp;&nbsp;
-        <input type="radio" id="faskes_1_no" name="faskes1" value="0" selected>
-        <label for="faskes1">No</label>
-      }
     </div>
 
     <div class="form-group">
       <label class="control-label col-sm-2" for='faskes2'>Faskes 2: </label>
-      if($data->faskes2 == 1){
-        <input type="radio" id="faskes2" name="faskes2" value="1" selected>
+        <input type="radio" id="faskes2" name="faskes2" value="1" {{$data->faskes2 == 1 ? "checked":""}}>
         <label for="faskes2">Yes</label>&nbsp;&nbsp;&nbsp;
-        <input type="radio" id="faskes2" name="faskes2" value="0">
+        <input type="radio" id="faskes2" name="faskes2" value="0" {{$data->faskes2 == 0 ? "checked":""}}>
         <label for="faskes2">No</label>
-      } else {
-        <input type="radio" id="faskes2" name="faskes2" value="1">
-        <label for="faskes2">Yes</label>&nbsp;&nbsp;&nbsp;
-        <input type="radio" id="faskes2" name="faskes2" value="0" selected>
-        <label for="faskes2">No</label>
-      }
     </div>
 
     <div class="form-group">
       <label class="control-label col-sm-2" for='faskes3'>Faskes 3: </label>
-      if($data->faskes3 == 1){
-        <input type="radio" id="faskes3" name="faskes3" value="1" selected>
+        <input type="radio" id="faskes3" name="faskes3" value="1" {{$data->faskes3 == 1 ? "checked":""}}>
         <label for="faskes3">Yes</label>&nbsp;&nbsp;&nbsp;
-        <input type="radio" id="faskes3" name="faskes3" value="0">
+        <input type="radio" id="faskes3" name="faskes3" value="0" {{$data->faskes3 == 0 ? "checked":""}}>
         <label for="faskes3">No</label>
-      } else {
-        <input type="radio" id="faskes3" name="faskes3" value="1">
-        <label for="faskes3">Yes</label>&nbsp;&nbsp;&nbsp;
-        <input type="radio" id="faskes3" name="faskes3" value="0" selected>
-        <label for="faskes3">No</label>
-      }
     </div>
 
     <div class="form-group">        

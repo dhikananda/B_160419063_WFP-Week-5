@@ -185,7 +185,9 @@ class MedicineController extends Controller
     public function edit(Medicine $medicine)
     {
         $data = $medicine;
-        return view('medicine.edit', compact('data'));
+        $category = $data->category;
+        $allcat = Category::all();
+        return view('medicine.edit', compact('data', 'category','allcat'));
     }
 
     /**
@@ -197,7 +199,18 @@ class MedicineController extends Controller
      */
     public function update(Request $request, Medicine $medicine)
     {
-        //
+        $medicine->generic_name = $request->get('generic_name');
+        $medicine->form = $request->get('form');
+        $medicine->restriction_formula = $request->get('restriction_form');
+        $medicine->price = $request->get('price');
+        $medicine->description = $request->get('description');
+        $medicine->category_id = $request->get('category_id');
+        $medicine->faskes1 = $request->get('faskes1');
+        $medicine->faskes2 = $request->get('faskes2');
+        $medicine->faskes3 = $request->get('faskes3');
+        $medicine->save();
+
+        return redirect()->route('reportShowAllDataNFP')->with('status','Medicine data is changed');
     }
 
     /**
@@ -208,6 +221,12 @@ class MedicineController extends Controller
      */
     public function destroy(Medicine $medicine)
     {
-        //
+        try {
+            $medicine->delete();
+            return redirect()->route('reportShowAllDataNFP')->with('status','Success delete data medicine');
+        } catch (\PDOException $e) {
+            $msg = "Data failed to delete. Please make sure that child data already deleted too";
+            return redirect()->route('reportShowAllDataNFP')->with('error',$msg);
+        }
     }
 }
