@@ -20,7 +20,7 @@ Route::get('/', function () {
 Route::get('/report/listmedicine/{id}','CategoryController@showlist')->name('reportShowMedicine');
 
 // tugas
-Route::get('show_category','CategoryController@showAllData')->name('reportShowCategory');
+// Route::get('show_category','CategoryController@showAllData')->name('reportShowCategory');
 Route::get('show_medicine_nfp', 'MedicineController@showAllDataNFP')->name('reportShowAllDataNFP');
 Route::get('show_medicine_nfc', 'MedicineController@showAllDataNFC')->name('reportShowAllDataNFC');
 Route::get('show_count_category', 'MedicineController@countCategory')->name('reportCountCategory');
@@ -39,6 +39,10 @@ Route::get('transaction/showAllData','TransactionController@showData')->name('tr
 Route::resource('category','CategoryController');
 Route::resource('medicine','MedicineController');
 
+Route::middleware(['auth'])->group(function(){
+    Route::get('show_category','CategoryController@showAllData')->name('reportShowCategory');
+});
+
 Route::post('category/getEditForm','CategoryController@getEditForm')->name('category.getEditForm');
 Route::post('category/getEditForm2','CategoryController@getEditForm2')->name('category.getEditForm2');
 Route::post('category/saveData','CategoryController@saveData')->name('category.saveData');
@@ -48,3 +52,6 @@ Route::post('medicine/getEditFormMedic','MedicineController@getEditFormMedic')->
 Route::post('medicine/deleteData','MedicineController@deleteData')->name('medicine.deleteData');
 Route::post('medicine/getEditFormMedic2','MedicineController@getEditFormMedic2')->name('medicine.getEditFormMedic2');
 Route::post('medicine/saveData','MedicineController@saveData')->name('medicine.saveData');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

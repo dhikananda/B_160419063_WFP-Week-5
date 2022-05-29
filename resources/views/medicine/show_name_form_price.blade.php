@@ -177,11 +177,13 @@
           class="btn btn-xs btn-warning" onclick='getEditFormMedic2({{$li->id}})'>edit B</a>
         </td>
         <td>
+          @can('delete-permission',$li)
           <form method="post" action="{{ url('medicine/'.$li->id) }}">
             @csrf
             @method('DELETE')
             <input type="submit" value="delete" class="btn btn-danger btn-xs" onclick="if(!confirm('Are you sure to delte this record ?')) return false;">
           </form>
+          @endcan
 
           <a class='btn btn-xs btn-danger' 
           onclick='if(confirm("Are your sure?")) deleteDataRemoveTR({{$li->id}})'>delete 2</a>

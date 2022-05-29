@@ -155,6 +155,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        $this->authorize('delete-permission', $category);
+        
         try {
             $category->delete();
             return redirect()->route('reportShowCategory')->with('status','Success delete data category');

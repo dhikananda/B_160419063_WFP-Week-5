@@ -222,6 +222,8 @@ class MedicineController extends Controller
      */
     public function destroy(Medicine $medicine)
     {
+        $this->authorize('delete-permission', $medicine);
+
         try {
             $medicine->delete();
             return redirect()->route('reportShowAllDataNFP')->with('status','Success delete data medicine');
