@@ -183,4 +183,57 @@ class CategoryController extends Controller
         // parsing
         return view('report.list_medicines_by_category', compact('id_category','namecategory','result','getTotalData'));
     }
+
+    public function getEditForm(Request $request)
+    {
+        $id = $request->post('id');
+        $data = Category::find($id);
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('category.getEditForm',compact('data'))->render()
+        ), 200);
+    }
+
+    public function getEditForm2(Request $request)
+    {
+        $id = $request->post('id');
+        $data = Category::find($id);
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('category.getEditForm2',compact('data'))->render()
+        ), 200);
+    }
+
+    public function saveData(Request $request)
+    {
+        $id = $request->get('id');
+        $category = Category::find($id);
+        $category->name = $request->get('name');
+        $category->description = $request->get('description');
+        $category->save();
+
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => 'Success to change data category'
+        ), 200);
+    }
+
+    public function deleteData(Request $request)
+    {
+        try {
+            $id = $request->get('id');
+            $category = Category::find($id);
+            $category->delete();
+
+            return response()->json(array(
+                'status' => 'oke',
+                'msg' => 'Success to delete data category'
+            ), 200);
+        } catch (\PDOException $e) {
+            return response()->json(array(
+                'status' => 'gagal',
+                'msg' => 'Failed to delete data category'
+            ), 200);
+        }
+    }
 }

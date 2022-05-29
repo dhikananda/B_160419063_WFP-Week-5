@@ -27,8 +27,9 @@ class MedicineController extends Controller
         // ->get();
 
         $alldata_medicine = Medicine::all();
+        $category = Category::all();
 
-        return view('medicine.show_name_form_price', compact('alldata_medicine'));
+        return view('medicine.show_name_form_price', compact('alldata_medicine', 'category'));
     }
 
     public function showAllDataNFC()
@@ -123,7 +124,7 @@ class MedicineController extends Controller
     {
         $category = Category::all();
 
-        return view('medicine.create', compact('category'));
+        return view('medicine.create', compact('category'));    
     }
 
     /**
@@ -227,6 +228,70 @@ class MedicineController extends Controller
         } catch (\PDOException $e) {
             $msg = "Data failed to delete. Please make sure that child data already deleted too";
             return redirect()->route('reportShowAllDataNFP')->with('error',$msg);
+        }
+    }
+
+    public function getEditFormMedic(Request $request)
+    {
+        $id = $request->post('id');
+        $data = Medicine::find($id);
+        $category = $data->category;
+        $allcat = Category::all();
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('medicine.getEditForm',compact('data', 'category', 'allcat'))->render()
+        ), 200);
+    }
+
+    public function getEditFormMedic2(Request $request)
+    {
+        $id = $request->post('id');
+        $data = Medicine::find($id);
+        $category = $data->category;
+        $allcat = Category::all();
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('medicine.getEditForm2',compact('data', 'category', 'allcat'))->render()
+        ), 200);
+    }
+
+    public function saveData(Request $request)
+    {
+        $id = $request->get('id');
+        $medicine = Medicine::find($id);
+        $medicine->generic_name = $request->get('generic_name');
+        $medicine->form = $request->get('form');
+        $medicine->restriction_formula = $request->get('restriction_form');
+        $medicine->price = $request->get('price');
+        $medicine->description = $request->get('description');
+        $medicine->category_id = $request->get('category_id');
+        $medicine->faskes1 = $request->get('faskes1');
+        $medicine->faskes2 = $request->get('faskes2');
+        $medicine->faskes3 = $request->get('faskes3');
+        $medicine->save();
+
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => 'Success to change data category'
+        ), 200);
+    }
+
+    public function deleteData(Request $request)
+    {
+        try {
+            $id = $request->get('id');
+            $medicine = Medicine::find($id);
+            $medicine->delete();
+
+            return response()->json(array(
+                'status' => 'oke',
+                'msg' => 'Success to delete data medicine'
+            ), 200);
+        } catch (\PDOException $e) {
+            return response()->json(array(
+                'status' => 'gagal',
+                'msg' => 'Failed to delete data medicine'
+            ), 200);
         }
     }
 }
