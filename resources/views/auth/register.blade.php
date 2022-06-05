@@ -67,8 +67,10 @@
                             <div class='col-md-6'>
                                 <input type='radio' id='owner' name='roles' value='owner'>
                                 <label for='owner'>Owner</label><br>
-                                <input type='radio' id='oegawawi' name='roles' value='pegawai'>
-                                <label for='owner'>Pegawai</label><br>
+                                <input type='radio' id='pegawawi' name='roles' value='pegawai'>
+                                <label for='pegawai'>Pegawai</label><br>
+                                <input type='radio' id='member' name='roles' value='member'>
+                                <label for='member'>Member</label><br>
                             </div>
                         </div>
 

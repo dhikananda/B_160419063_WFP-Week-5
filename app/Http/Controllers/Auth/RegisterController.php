@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+use Illuminate\Support\Facades\Auth;
+
 class RegisterController extends Controller
 {
     /*
@@ -70,5 +72,24 @@ class RegisterController extends Controller
             'sebagai' => $data['roles'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function redirectTo()
+    {
+        $role = Auth::user()->sebagai;
+        switch ($role) {
+            case 'owner':
+                return '/category';
+                break;
+            case 'pegawai':
+                return '/medicine';
+                break;
+            case 'member':
+                return '/checkout';
+                break;
+            default:
+                return '/home';
+                break;
+        }
     }
 }
