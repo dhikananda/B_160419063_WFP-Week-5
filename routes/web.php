@@ -56,6 +56,12 @@ Route::middleware(['auth'])->group(function(){
 
 	Route::get('/checkout', 'TransactionController@form_submit_front');
 	Route::get('/submit_checkout','TransactionController@submit_front')->name('submitcheckout');
+
+	Route::post('category.editable','CategoryController@saveDataField')->name('category.saveDataField');
+	Route::post('category.changeLogo', 'CategoryController@changeLogo')->name('category.changeLogo');
+
+	Route::post('medicine.editable','MedicineController@saveDataField')->name('medicine.saveDataField');
+	Route::post('medicine.changeLogo', 'MedicineController@changeLogo')->name('medicine.changeLogo');
 });
 
 Auth::routes();

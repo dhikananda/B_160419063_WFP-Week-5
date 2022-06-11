@@ -2,8 +2,15 @@
 @section('content')
 <div class="container">
   <h2>Create New Category</h2>
-  <form method="post" class="form-horizontal" action="{{route('category.store')}}">
+  <form method="post" class="form-horizontal" action="{{route('category.store')}}" enctype="multipart/form-data">
     @csrf
+    <div class="form-group">
+      <label class="control-label col-sm-2">Logo</label>
+      <div class="col-sm-10">
+        <input type="file" name="logo" id="logo" class="form-control">
+      </div>
+    </div>
+
     <div class="form-group">
       <label class="control-label col-sm-2" for="name_category">Name:</label>
       <div class="col-sm-10">

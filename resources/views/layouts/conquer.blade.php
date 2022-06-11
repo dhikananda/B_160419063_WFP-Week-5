@@ -635,10 +635,13 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="{{ asset('conquer2/plugins/jquery.sparkline.min.js')}}" type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script src="{{ asset('conquer2/scripts/app.js" type="text/javascript"></script>
-<script src="{{ asset('conquer2/scripts/index.js" type="text/javascript"></script>
-<script src="{{ asset('conquer2/scripts/tasks.js" type="text/javascript"></script>
+<script src="{{ asset('conquer2/scripts/app.js') }}" type="text/javascript"></script>
+<script src="{{ asset('conquer2/scripts/index.js') }}" type="text/javascript"></script>
+<script src="{{ asset('conquer2/scripts/tasks.js') }}" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
+
+<script type="text/javascript" src="{{ asset('js/jquery.editable.min.js') }}"></script>
+
 <script>
 jQuery(document).ready(function() {    
    App.init(); // initlayout and core plugins
@@ -654,6 +657,8 @@ jQuery(document).ready(function() {
    Tasks.initDashboardWidget();
 });
 </script>
+
+@yield('initialscript')
 <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->

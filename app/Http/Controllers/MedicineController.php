@@ -137,6 +137,12 @@ class MedicineController extends Controller
     {
         $data = new Medicine();
 
+        $file= $request->file('logo');
+        $imgFolder = 'images';
+        $imgFile = time()."_".$file->getClientOriginalName();
+        $file->move($imgFolder,$imgFile);
+        $data->logo = $imgFile;
+
         $data->generic_name = $request->get('generic_name');
         $data->form = $request->get('form');
         $data->restriction_formula = $request->get('restriction_form');
@@ -327,5 +333,37 @@ class MedicineController extends Controller
     public function cart()
     {
         return view('frontend.cart');
+    }
+
+    public function saveDataField(Request $request)
+    {
+        $id = $request->get('id');
+        $fname = $request->get('fname');
+        $value = $request->get('value');
+
+        // dd($fname);
+
+        $medicine = Medicine::find($id);
+        $medicine->$fname = $value;
+        $medicine->save();
+
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => 'Medicine data updated'
+        ), 200);
+    }
+
+    public function changeLogo(Request $request)
+    {
+        $id = $request->get('id');
+        $file = $request->file('logo');
+        $imgFolder = 'images';
+        $imgFile = time().'_'.$file->getClientOriginalName();
+        $file->move($imgFolder,$imgFile);
+        $medicine = Medicine::find($id);
+        $medicine->logo = $imgFile;
+        $medicine->save();
+
+        return redirect()->route('reportShowAllDataNFP')->with('status','Medicine logo is changed');
     }
 }

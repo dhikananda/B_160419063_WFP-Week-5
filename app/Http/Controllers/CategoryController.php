@@ -100,6 +100,12 @@ class CategoryController extends Controller
     {
         $data = new Category();
 
+        $file= $request->file('logo');
+        $imgFolder = 'images';
+        $imgFile = time()."_".$file->getClientOriginalName();
+        $file->move($imgFolder,$imgFile);
+        $data->logo = $imgFile;
+
         $data->name = $request->get('name_category');
         $data->description = $request->get('description');
 
@@ -237,5 +243,37 @@ class CategoryController extends Controller
                 'msg' => 'Failed to delete data category'
             ), 200);
         }
+    }
+
+    public function saveDataField(Request $request)
+    {
+        $id = $request->get('id');
+        $fname = $request->get('fname');
+        $value = $request->get('value');
+
+        // dd($id);
+
+        $category = Category::find($id);
+        $category->$fname = $value;
+        $category->save();
+
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => 'Supplier data updated'
+        ), 200);
+    }
+
+    public function changeLogo(Request $request)
+    {
+        $id = $request->get('id');
+        $file = $request->file('logo');
+        $imgFolder = 'images';
+        $imgFile = time().'_'.$file->getClientOriginalName();
+        $file->move($imgFolder,$imgFile);
+        $category = Category::find($id);
+        $category->logo = $imgFile;
+        $category->save();
+
+        return redirect()->route('reportShowCategory')->with('status','Category logo is changed');
     }
 }

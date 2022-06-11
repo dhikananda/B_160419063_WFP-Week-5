@@ -2,8 +2,15 @@
 @section('content')
 <div class="container">
   <h2>Create New Medicine</h2>
-  <form method="post" class="form-horizontal" action="{{route('medicine.store')}}">
+  <form method="post" class="form-horizontal" action="{{route('medicine.store')}}" enctype="multipart/form-data">
     @csrf
+    <div class="form-group">
+      <label class="control-label col-sm-2">Logo</label>
+      <div class="col-sm-10">
+        <input type="file" name="logo" id="logo" class="form-control">
+      </div>
+    </div>
+
     <div class="form-group">
       <label class="control-label col-sm-2" for="generic_name">Generic Name:</label>
       <div class="col-sm-10">

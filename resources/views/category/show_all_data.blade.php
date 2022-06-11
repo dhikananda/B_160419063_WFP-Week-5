@@ -78,6 +78,7 @@
         <th>ID</th>
         <th>Name</th>
         <th>Description</th>
+        <th>Logo</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -85,8 +86,48 @@
     @foreach ($alldata as $li)
       <tr id='tr_{{$li->id}}'>
         <td>{{ $li->id }}</td>
-        <td id='td_name_{{$li->id}}'>{{ $li->name }}</td>
-        <td id='td_description_{{$li->id}}'>{{ $li->description }}</td>
+        <td class="editable" id='td_name_{{$li->id}}'>{{ $li->name }}</td>
+        <td class="editable" id='td_description_{{$li->id}}'>{{ $li->description }}</td>
+        <td>
+          <img height='50px' src='{{ asset("/images/".$li->logo) }}'></img>
+        
+          <!-- modal create edit logo -->
+          <div class="modal fade" id="modalChange_{{ $li->id }}" tabindex="-1" role="basic" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content" >
+              <form method="post" class="form-horizontal" action="{{route('category.changeLogo')}}" enctype='multipart/form-data'>
+                <div class="modal-header">
+                  <button type="button" class="close" 
+                    data-dismiss="modal" aria-hidden="true"></button>
+                  <h4 class="modal-title">Change Logo</h4>
+                </div>
+
+                <div class="modal-body">
+                <!-- FORM CREATE -->
+                  @csrf
+                  <div class="form-group">
+                    <label class="control-label col-sm-2" for="logo">Logo</label>
+                    <div class="col-sm-10">
+                      <input type="file" class="form-control" id="logo"name="logo">
+                      <input type='hidden' id='id' name='id' value='{{ $li->id }}'></input>
+                    </div>
+                  </div>
+
+              </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-info">Submit</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+              </form>
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <a href='#modalChange_{{ $li->id }}' data-toggle='modal' class='btn btn-xs btn-default'>Change</a>
+        
+        </td>
+
         <td>
           <a href="{{ route('category.edit',$li->id) }}" class="btn btn-xs btn-info">edit</a>
 
@@ -187,5 +228,33 @@
             }
         });
     }
+</script>
+@endsection
+
+@section('initialscript')
+<script>
+  $('.editable').editable({
+    closeOnEnter :true,
+    callback:function(data){
+      if(data.content){
+        var s_id = data.$el[0].id
+        var fname = s_id.split('_')[1]
+        var id = s_id.split('_')[2]
+
+        $.ajax({
+            type:'POST',
+            url:'{{route("category.saveDataField")}}',
+            data:{'_token':'<?php echo csrf_token() ?>',
+                'id':id,
+                'fname':fname,
+                'value':data.content
+            },
+            success: function(data){
+              alert(data.msg)
+            }
+        });
+      }
+    }
+  });
 </script>
 @endsection
